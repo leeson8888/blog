@@ -98,6 +98,41 @@ console.log(this.b);    //undefined
 
 
 
+### 真正的全局跨模块变量（不推荐）
+
+_a.js 模块_
+
+```js
+var a =1;
+aa =2;   // 不推荐
+
+function fn(){
+  console.log(this == global);  // true
+  this.c = 10;  
+}
+
+fn();  // 不推荐
+
+module.exports.a =a;
+
+```
+
+
+_b.js_
+
+```js
+var a = require('./a.js');
+
+console.log(a.a);  //1
+
+console.log(global.aa);   // 2
+console.log(global.c);    //10
+```
+
+可以发现，变量aa和c 在a.js中并没有导出，却可以在全局访问，编码时是需要避免的。
+
+
+
 参考：https://zhuanlan.zhihu.com/p/25916585
 
 参考：https://nodejs.org/api/modules.html#modules_the_module_wrapper
