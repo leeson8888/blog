@@ -99,7 +99,9 @@ console.log(this.b);    //undefined
 
 
 参考：https://zhuanlan.zhihu.com/p/25916585
+
 参考：https://nodejs.org/api/modules.html#modules_the_module_wrapper
+
 参考：https://www.zhihu.com/question/57375179/answer/152633354
 
 
