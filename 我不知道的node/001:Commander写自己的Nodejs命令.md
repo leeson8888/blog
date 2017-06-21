@@ -121,10 +121,88 @@ program.option('-c, --cheese [type]', 'add cheese [marble]');
 允许命令行的未知选项
 
 
+# command 模块实战
 
+## - 入门
 
+在当前目录,新建：commd.js
+```js
+#!/usr/bin/env node
 
+var program = require('commander');
 
+program
+  .version('1.0.0')
+  .parse(process.argv);
+
+```
+
+执行 npm init -y 建立 package.json，并添加bin属性
+
+```js
+  "bin": {
+    "mycommdtest": "./commd.js"
+  }
+```
+
+建立软连接： npm link
+
+执行：mycommdtest -h,则输出如下：
+
+```js
+  //输出
+Usage: mycommdtest [options]
+
+Options:
+
+-h, --help     output usage information
+-V, --version  output the version number
+```
+
+可见:
+
+commander模块提供-h, --help和-V, --version两个内置命令。
+
+## -创建命令
+
+创建一个 `mycommdtest print <author>`的命令，当用户输入`mycommdtest print leeson`时，终端显示hello leeson。修改commd.js：
+
+```js
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program
+  .version('1.0.0')
+  .usage('<command> [options]')
+   //建立：mycommdtest-print命令
+  .command('print', 'print the anthor') 
+  .parse(process.argv);
+```
+建立`mycommdtest-print`命令文件:mycommdtest-print.js
+
+```js
+#!/usr/bin/env node
+console.log('hello author');
+```
+
+执行：mycommdtest print 则输出:`hello author`
+
+如果想根据用户的输入进行输出，修改mycommdtest-print.js：
+
+```js
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program.parse(process.argv);
+
+const author = program.args[0];
+
+console.log('hello', author);
+```
+
+则，当用户输入 ：`mycommdtest print leeson`时，输出：`hello leeson`
 
 
 

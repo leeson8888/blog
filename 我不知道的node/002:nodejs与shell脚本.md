@@ -55,6 +55,40 @@ chmod 777 script.js
 ```
 
 
+# npm link命令，为当前模块创建一个符号链接
+
+在当前项目目录创建 app.js
+```js
+#!/usr/bin/env node
+console.log("hello,npm link");
+```
+
+赋予权限:`chmod 777 ./app.js`
+
+执行：npm init -y 生成package.json文件,并添加bin属性：
+
+```js
+  "bin": {
+    "myapp": "./app.js"
+  },
+```
+
+执行：npm link
+
+输出如下，说明创建链接成功
+```js
+up to date in 0.094s
+/usr/local/bin/myapp -> /usr/local/lib/node_modules/package/app.js
+/usr/local/lib/node_modules/package -> /usr/local/var/www/gitclone/github-blog/code/node/package
+```
+
+执行：`myapp`
+
+输出：hello,npm link
+
+
+
+
 
 
 参考文章：http://www.infoq.com/cn/articles/yph-shell-meet-nodejs/
