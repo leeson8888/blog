@@ -112,5 +112,51 @@ url和email可以任意填或不填，如果只填一个，可以直接写成一
 
 
 
+# npm_lifecycle_event变量
+npm 提供一个npm_lifecycle_event变量，返回当前正在运行的脚本名称，比如pretest、test、posttest等等。所以，可以利用这个变量，在同一个脚本文件里面，为不同的npm scripts命令编写代码。
 
+例如：
+```js
+// npm_lifecycle_event ==> scripts中定义的脚本启动名称
+const TARGET = process.env.npm_lifecycle_event;
 
+if (TARGET === 'test') {
+  console.log(`Running the test task!`);
+}
+
+if (TARGET === 'pretest') {
+  console.log(`Running the pretest task!`);
+}
+
+if (TARGET === 'posttest') {
+  console.log(`Running the posttest task!`);
+}
+```
+
+# npm 变量
+pm 脚本有一个非常强大的功能，就是可以使用 npm 的内部变量。
+首先，通过npm_package_前缀，npm 脚本可以拿到package.json里面的字段。比如，下面是一个package.json。
+
+```js
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" :"node ./test1.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+```
+则在当前目录下的test1.js中可以通过以下方式输出name 和version等属性值：
+
+```js
+console.log(process.env.npm_package_name);  // npm
+console.log(process.env.npm_package_version); //1.0.0
+console.log(process.env.npm_package_scripts_start);//node ./test1.js
+```
