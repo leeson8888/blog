@@ -21,3 +21,16 @@ ln ln.js /usr/local/bin/wodeln_command
 //输出：hello,ln
 ```
 
+# which
+which命令用于查找并显示给定命令的绝对路径，环境变量PATH中保存了查找命令时需要遍历的目录。
+which是根据使用者所配置的 PATH 变量内的目录去搜寻可运行档的！所以，不同的 PATH 配置内容所找到的命令当然不一样的！
+
+例如，查询当前系统是否安装node环境.
+
+**也可以通过which查看npm link 生成的命令**
+
+```js
+which node
+// 如果安装，输出如下：
+// usr/local/bin/node
+```

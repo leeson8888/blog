@@ -118,7 +118,29 @@ program.option('-c, --cheese [type]', 'add cheese [marble]');
 
 ## Command#allowUnknownOption()
 
-允许命令行的未知选项
+允许命令行的未知选项，不报错
+
+# 其他重点知识
+
+### option() 接收 四个参数
+
+* 第一个参数中，如： -d 为short option， --date 为对应的long option, 二者的分割符是 |, 。在命令行里使用时, 这两个是等价的。 区别是后者可以在程序里通过 program.date 的方式取到该option的值，此处option的值为bool，也可以为字符串
+* 第二个为option描述, 会在help信息里展示出来
+* 第三个参数为回调函数
+* 第四个参数为默认值
+
+### option 类型:
+
+required 和 optional
+
+在option的第一个参数里, 除了short, long option, 还可以指定option类型, 分隔符也是 |, 其中
+
+- <lang> required参数, 使用时后边必须跟参数值, 否则程序会报错。
+
+- [db] optional参数, 后面可以选择是否跟参数值
+
+
+
 
 
 # command 模块实战
